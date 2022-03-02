@@ -55,7 +55,6 @@ spec:
       labels:
         k8s-app: {{ .Values.randomDpltName }}
         tier: backend
-      # timestamp used for force the redeploy each time
       annotations:
         timestamp: "{{ .Values.timestamp }}"
     spec:
@@ -65,6 +64,12 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: {{ .Values.randomPort }}
+        env:
+        - name: PREMIER-API-URL
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-data
+              key: premier-api-url
         readinessProbe:
           httpGet:
             path: /ping

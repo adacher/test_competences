@@ -16,14 +16,17 @@
 
 # kubectl get ingress -n namespace-test
 # Copy IP address shown under ADDRESS
+# open file /etc/hosts with root privilege.
+# add :
+# IP_ADDRESS entry-test.info
 
 # Test request :
 
 # Premier pod
-# curl 192.168.59.101:30000/premier?number=1
+# curl entry-test.info:30000/premier?number=1
 
 # Random pod
-# curl 192.168.59.101:30001/random
+# curl entry-test.info:30001/random
 
 # Check probes
 
