@@ -4,7 +4,7 @@ services:
   flask-premier:
     build:
       context: ${DOCKER_PREMIER_DIR}
-    image: ${DOCKER_PREMIER_IMG}-beta
+    image: ${DOCKER_PREMIER_IMG}
     ports:
       - 33330:33330
     restart: always
@@ -13,7 +13,7 @@ services:
   flask-random:
     build:
       context: ${DOCKER_RANDOM_DIR}
-    image: ${DOCKER_RANDOM_IMG}-beta
+    image: ${DOCKER_RANDOM_IMG}
     ports:
       - 44440:44440
     restart: always
@@ -27,7 +27,3 @@ services:
     ports:
       - "80:80"
       - "443:443"
-#networks:
-# default:
-#  external:
-#   name: nginx-proxy

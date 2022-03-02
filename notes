@@ -1,0 +1,87 @@
+# --- Local run ---
+
+
+# chmod +x flask-premier/entrypoint.sh
+# chmod +x flask-random/entrypoint.sh
+# minikube start --driver=virtualbox
+# minikube addons enable ingress
+# eval $(minikube -p minikube docker-env)
+# make build
+# Accept docker creating default local network
+# terraform init
+# terraform apply -var-file="terraform.tfvars"
+# helm install "entrytestchart" helm-deployment/ -f helm-deployment/values.yaml --set timestamp="`date +'%s'`"
+# helm upgrade "entrytestchart" helm-deployment/ -f helm-deployment/values.yaml --set timestamp="`date +'%s'`"
+
+
+# kubectl get ingress -n namespace-test
+# Copy IP address shown under ADDRESS
+
+# Test request :
+
+# Premier pod
+# curl 192.168.59.101:30000/premier?number=1
+
+# Random pod
+# curl 192.168.59.101:30001/random
+
+# Check probes
+
+# kubectl get pods -n namespace-test 
+# kubectl describe pod <pod-name> -n namespace-test
+# Example :
+#Liveness:       http-get http://:33330/health delay=20s timeout=1s period=20s #success=1 #failure=3
+#Readiness:      http-get http://:33330/ping delay=5s timeout=1s period=10s #success=1 #failure=3
+
+
+
+
+
+# Debug commands
+
+# delete Docker images :
+# docker rm $(docker ps --filter=status=exited --filter=status=created -q)
+# docker rmi $(docker images -a --filter=dangling=true -q)
+
+# Check if containers share the same docker network
+#docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' flask-random
+#docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' flask-premier
+#docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' nginx-proxy
+
+
+
+# Test
+
+# Premier container
+# curl localhost:33330/ping
+# curl localhost:33330/health
+# curl localhost:33330/premier?number=1
+
+# Random container
+# curl localhost:44440/health
+# curl localhost:44440/ping
+# curl localhost:44440/random
+
+
+
+
+# --- Kubernetes ---
+# Context should be set to minikube by default after running minikube start.
+# Check current context : kubectl config get-contexts
+# Delete ~/.kube/config if error or modify file to use minikube.
+
+# --- Terraform ---
+
+# terraform init
+# terraform apply -var-file="terraform.tfvars"
+
+
+# helm
+# helm upgrade -i "EntryTestChart" helm-deployment/ timestamp="`date +'%s'`"
+# helm upgrade -i -n "namespace-test" "entryTestChart" helm-deployment/ --set baseImage="${fullpath_image}",namespace="${namespace}",ingressRulesHost=${url},arg=${args},replicaCount=${replica},timestamp="`date +'%s'`"
+# helm install "entrytestchart" helm-deployment/ -f helm-deployment/values.yaml --set timestamp="`date +'%s'`"
+# helm upgrade "entrytestchart" helm-deployment/ -f helm-deployment/values.yaml --set timestamp="`date +'%s'`"
+
+
+
+# entry-test.info:44440/premier + str(number)

@@ -1,0 +1,32 @@
+# Common
+namespace: namespace-test
+version: v0.1.0
+replicaCount: 1
+##Ingress
+ingressName:  ingress-proxy
+ingressRulesHost: entry-test.info
+
+################################
+# flask-premier-api
+################################
+premierPort: 33330
+# Service
+premierSvcName: flask-premier-svc
+#Deployment
+premierDpltName: flask-premier-dplt
+premierImage:  entrytest/flask-premier:0.1
+
+
+################################
+# flask-random-api
+################################
+randomPort: 44440
+#Service
+radomSvcName: flask-random-svc
+#Deployment
+randomDpltName: flask-random-dplt
+randomImage:  entrytest/flask-random:0.1
+
+
+
+#arg: ?
