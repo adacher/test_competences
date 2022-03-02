@@ -1,0 +1,33 @@
+version: "3.2"
+
+services:
+  flask-premier:
+    build:
+      context: ${DOCKER_PREMIER_DIR}
+    image: ${DOCKER_PREMIER_IMG}-beta
+    ports:
+      - 33330:33330
+    restart: always
+    container_name: flask-premier
+
+  flask-random:
+    build:
+      context: ${DOCKER_RANDOM_DIR}
+    image: ${DOCKER_RANDOM_IMG}-beta
+    ports:
+      - 44440:44440
+    restart: always
+    container_name: flask-random
+
+  nginx:
+    build:
+      context: ${DOCKER_NGINX_DIR}
+    image: ${DOCKER_NGINX_IMG}
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+#networks:
+# default:
+#  external:
+#   name: nginx-proxy
