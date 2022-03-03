@@ -66,7 +66,7 @@ Oracle VM VirtualBox VM Selector v6.1.32
 ------------------------------------------------------------------------------------------
 
 
-#Walkthrough, à suivre dans l'ordre chronologique.
+**Walkthrough : Deploiement kubernetes**
 
 Initialisation du cluster k8s via minikube via virtualbox.
 ```
@@ -126,11 +126,12 @@ Ouvrir le fichier /etc/hosts avec les droits roots (ex : sudo vim /etc/hosts).
 IP_ADDRESS entry-test.info
 ```
 
-#Test des routes :
+**Test des routes :**
 
 Pod contenant la route premier  :
 
 ```
+curl entry-test.info:30000/premier
 curl entry-test.info:30000/premier?number=10
 curl entry-test.info:30000//health
 curl entry-test.info:30000/ping
@@ -179,3 +180,50 @@ kubectl describe configMap <configMap-name> -n namespace-test
 ```
 helm upgrade "entrytestchart" helm-deployment/ -f helm-deployment/values.yaml --set timestamp="`date +'%s'`"
 ```
+
+
+**Walkthrough : Déploiement local, uniquement via Docker.**
+
+Ouvrir un nouveau terminal, pour éviter un conflit de ports entre un service k8s par défaut et le nginx-proxy.
+
+Élévation des droits sur les fichiers entypoints.sh (Si pas déjà fait).
+```
+chmod +x flask-premier/entrypoint.sh
+chmod +x flask-random/entrypoint.sh
+```
+
+Construction des images et démarrage des containers.
+Il faut accepter la création d'un network par défaut lorsque demandé par docker. (écrire yes).
+```
+make
+```
+
+Test api Premier :
+```
+curl localhost:33330/premier
+curl localhost:33330/premier?number=10
+curl localhost:33330/health
+curl localhost:33330/ping
+curl localhost:33330/metrics
+```
+
+Test api Random :
+```
+curl localhost:44440/random
+curl localhost:44440//health
+curl localhost:44440/ping
+curl localhost:44440/metrics
+```
+
+**Débug :**
+
+Si le container flask-random n'arrive pas a joindre la route /premier du container flask-premier, vérifier si les containers partagent le même réseau :
+```
+docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' flask-random
+docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' flask-premier
+docker inspect -f '{{range $key, $value := .NetworkSettings.Networks}}{{$key}} {{end}}' nginx-proxy
+```
+
+
+
+
