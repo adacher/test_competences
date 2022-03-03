@@ -14,7 +14,6 @@ spec:
       labels:
         k8s-app: {{ .Values.premierDpltName }}
         tier: backend
-      # timestamp used for force the redeploy each time
       annotations:
         timestamp: "{{ .Values.timestamp }}"
     spec:
@@ -29,6 +28,9 @@ spec:
             path: /ping
             port: {{ .Values.premierPort }}
             scheme: HTTP
+            httpHeaders:
+            - name: Host
+              value: http://entry-test.info
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
@@ -36,6 +38,9 @@ spec:
             path: /health
             port: {{ .Values.premierPort }}
             scheme: HTTP
+            httpHeaders:
+              - name: Host
+                value: http://entry-test.info
           initialDelaySeconds: 20
           periodSeconds: 20
 ---
@@ -75,6 +80,9 @@ spec:
             path: /ping
             port: {{ .Values.randomPort }}
             scheme: HTTP
+            httpHeaders:
+            - name: Host
+              value: http://entry-test.info
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
@@ -82,5 +90,8 @@ spec:
             path: /health
             port: {{ .Values.randomPort }}
             scheme: HTTP
+            httpHeaders:
+            - name: Host
+              value: http://entry-test.info
           initialDelaySeconds: 20
           periodSeconds: 20
