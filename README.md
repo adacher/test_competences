@@ -147,6 +147,11 @@ curl entry-test.info:30001/ping
 curl entry-test.info:30001/metrics
 ```
 
+Vérification des propriétés du namespace :
+```
+kubectl describe namespace  namespace-test
+```
+
 Vérification des déploiements :
 ```
 kubectl get deployments -n namespace-test
