@@ -134,7 +134,7 @@ Pod contenant la route premier  :
 ```
 curl entry-test.info:30000/premier
 curl entry-test.info:30000/premier?number=10
-curl entry-test.info:30000//health
+curl entry-test.info:30000/health
 curl entry-test.info:30000/ping
 curl entry-test.info:30000/metrics
 ```
@@ -142,7 +142,7 @@ curl entry-test.info:30000/metrics
 Pod contenant la route random :
 ```
 curl entry-test.info:30001/random
-curl entry-test.info:30001//health
+curl entry-test.info:30001/health
 curl entry-test.info:30001/ping
 curl entry-test.info:30001/metrics
 ```
@@ -216,7 +216,7 @@ curl localhost:33330/metrics
 Test api Random :
 ```
 curl localhost:44440/random
-curl localhost:44440//health
+curl localhost:44440/health
 curl localhost:44440/ping
 curl localhost:44440/metrics
 ```
