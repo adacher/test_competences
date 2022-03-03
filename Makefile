@@ -15,13 +15,13 @@ start:
 
 build-flask-premier:
 	@echo "################################################################"
-	@echo "# BUILD FRONTEND - $(DOCKER_PREMIER_IMG)"
+	@echo "# BUILD FLASK PREMIER - $(DOCKER_PREMIER_IMG)"
 	@echo "################################################################"
 	docker-compose build flask-premier
 
 build-flask-random:
 	@echo "################################################################"
-	@echo "# BUILD FRONTEND - $(DOCKER_RANDOM_IMG)"
+	@echo "# BUILD FLASK RANDOM - $(DOCKER_RANDOM_IMG)"
 	@echo "################################################################"
 	docker-compose build flask-random
 

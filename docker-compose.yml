@@ -16,6 +16,8 @@ services:
     image: ${DOCKER_RANDOM_IMG}
     ports:
       - 44440:44440
+    environment:
+      PREMIER-API-URL: http://flask-premier:33330/premier?number=
     restart: always
     container_name: flask-random
 
