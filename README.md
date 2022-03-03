@@ -121,6 +121,7 @@ Une fois le déploiement effectué :
 ```
 kubectl get ingress -n namespace-test
 Copier la valeur de l'addresse IP affichée en de dessous de ADDRESS.
+(L'adresse met quelques secondes a se génerer, relancer la commande jusqu'a ce qu'elle soit affichée).
 Ouvrir le fichier /etc/hosts avec les droits roots (ex : sudo vim /etc/hosts).
 # Écrire à la dernière ligne:
 IP_ADDRESS entry-test.info
