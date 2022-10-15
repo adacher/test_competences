@@ -22,7 +22,7 @@ premierImage:  entrytest/flask-premier:0.1
 ################################
 randomPort: 44440
 #Service
-radomSvcName: flask-random-svc
+randomSvcName: flask-random-svc
 #Deployment
 randomDpltName: flask-random-dplt
 randomImage:  entrytest/flask-random:0.1

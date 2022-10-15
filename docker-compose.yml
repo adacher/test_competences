@@ -27,5 +27,5 @@ services:
     image: ${DOCKER_NGINX_IMG}
     container_name: nginx-proxy
     ports:
-      - "80:80"
+      - "8080:8080"
       - "443:443"

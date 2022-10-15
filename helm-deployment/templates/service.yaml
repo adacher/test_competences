@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.radomSvcName}}
+  name: {{ .Values.randomSvcName}}
   namespace: {{ .Values.namespace }}
   labels:
     k8s-app: {{ .Values.randomDpltName }}

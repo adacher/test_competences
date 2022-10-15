@@ -1,6 +1,7 @@
-http {
-  server {
-    listen 80;
+server {
+    listen 8080;
+    root /usr/share/nginx/html;
+    index index.html index.htm;
 
     location /premier {
       proxy_pass http://flask-premier:33330;
@@ -9,4 +10,3 @@ http {
       proxy_pass http://flask-random:44440;
     }
   }
-}

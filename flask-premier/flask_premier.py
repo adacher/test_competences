@@ -1,11 +1,14 @@
 from flask import jsonify
 from flask import request
+import requests as faceit_connect
 from flask import Flask
 from prometheus_flask_exporter import PrometheusMetrics
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 def entry():
     app = Flask(__name__)
-    metrics = PrometheusMetrics(app)
+    metrics = PrometheusMetrics(app, path='/metrics')
     return app
 
 app = entry()
@@ -13,6 +16,7 @@ app = entry()
 @app.route('/premier')
 def get_number():
     number = request.args.get('number', default = 1, type = int)
+    app.logger.info('Processing default request')
     if (number % 2) == 0:
         return jsonify(pair=number), 200
     else:

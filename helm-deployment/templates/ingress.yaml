@@ -21,6 +21,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.radomSvcName }}
+                name: {{ .Values.randomSvcName }}
                 port:
                   number: {{ .Values.randomPort }}
