@@ -1,8 +1,8 @@
-import requests
-from random import randrange
 import os
+import requests
 from flask import jsonify
 from flask import Flask
+from random import randrange
 from prometheus_flask_exporter import PrometheusMetrics
 
 def entry():

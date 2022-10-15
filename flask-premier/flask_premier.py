@@ -1,6 +1,5 @@
 from flask import jsonify
 from flask import request
-import requests as faceit_connect
 from flask import Flask
 from prometheus_flask_exporter import PrometheusMetrics
 import logging
